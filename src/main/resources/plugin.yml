@@ -1,7 +1,8 @@
 name: CactusWrench
-version: 1.0
+version: 1.0.1
 main: top.chancelethay.cactuswrench.CactusWrenchPlugin
 api-version: 1.21.8
 commands:
   cactuswrench:
+
     description: 使用仙人掌来反转方块的朝向
