@@ -60,6 +60,7 @@ public class CactusWrenchPlugin extends JavaPlugin implements Listener {
                 if (newFacing != null && currentFacing != newFacing) {
                     directional.setFacing(newFacing);
                     block.setBlockData(directional);
+                    block.getState().update(true);
                 }
             }
         }
@@ -105,6 +106,7 @@ public class CactusWrenchPlugin extends JavaPlugin implements Listener {
                 if (newFacing != null && currentFacing != newFacing) {
                     directional.setFacing(newFacing);
                     block.setBlockData(directional);
+                    block.getState().update(true);
                 }
             }
         }
