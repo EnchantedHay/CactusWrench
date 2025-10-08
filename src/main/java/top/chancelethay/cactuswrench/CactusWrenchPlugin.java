@@ -2,6 +2,7 @@ package top.chancelethay.cactuswrench;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Directional;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -28,39 +29,13 @@ public class CactusWrenchPlugin extends JavaPlugin implements Listener {
         if (itemInMainHand.getType() == Material.CACTUS && event.hasBlock()) {
             Block block = event.getClickedBlock();
 
-            if (block != null && block.getBlockData() instanceof Directional) {
-                Directional directional = (Directional) block.getBlockData();
-
-                org.bukkit.block.BlockFace currentFacing = directional.getFacing();
-                org.bukkit.block.BlockFace newFacing = null;
-
-                switch (currentFacing) {
-                    case NORTH:
-                        newFacing = org.bukkit.block.BlockFace.SOUTH;
-                        break;
-                    case SOUTH:
-                        newFacing = org.bukkit.block.BlockFace.NORTH;
-                        break;
-                    case EAST:
-                        newFacing = org.bukkit.block.BlockFace.WEST;
-                        break;
-                    case WEST:
-                        newFacing = org.bukkit.block.BlockFace.EAST;
-                        break;
-                    case DOWN:
-                        newFacing = org.bukkit.block.BlockFace.UP;
-                        break;
-                    case UP:
-                        newFacing = org.bukkit.block.BlockFace.DOWN;
-                        break;
-                    default:
-                        break;
-                }
-
-                if (newFacing != null && currentFacing != newFacing) {
-                    directional.setFacing(newFacing);
-                    block.setBlockData(directional);
-                    block.getState().update(true);
+            if (block != null) {
+                if (block.getType().isInteractable()) {
+                    if (player.isSneaking()) {
+                        rotateBlock(block);
+                    }
+                } else {
+                    rotateBlock(block);
                 }
             }
         }
@@ -75,39 +50,44 @@ public class CactusWrenchPlugin extends JavaPlugin implements Listener {
             Block block = event.getBlockPlaced();
 
             if (block.getBlockData() instanceof Directional) {
-                Directional directional = (Directional) block.getBlockData();
+                rotateBlock(block);
+            }
+        }
+    }
 
-                org.bukkit.block.BlockFace currentFacing = directional.getFacing();
-                org.bukkit.block.BlockFace newFacing = null;
+    private void rotateBlock(Block block) {
+        if (block.getBlockData() instanceof Directional) {
+            Directional directional = (Directional) block.getBlockData();
 
-                switch (currentFacing) {
-                    case NORTH:
-                        newFacing = org.bukkit.block.BlockFace.SOUTH;
-                        break;
-                    case SOUTH:
-                        newFacing = org.bukkit.block.BlockFace.NORTH;
-                        break;
-                    case EAST:
-                        newFacing = org.bukkit.block.BlockFace.WEST;
-                        break;
-                    case WEST:
-                        newFacing = org.bukkit.block.BlockFace.EAST;
-                        break;
-                    case DOWN:
-                        newFacing = org.bukkit.block.BlockFace.UP;
-                        break;
-                    case UP:
-                        newFacing = org.bukkit.block.BlockFace.DOWN;
-                        break;
-                    default:
-                        break;
-                }
+            org.bukkit.block.BlockFace currentFacing = directional.getFacing();
+            org.bukkit.block.BlockFace newFacing = null;
 
-                if (newFacing != null && currentFacing != newFacing) {
-                    directional.setFacing(newFacing);
-                    block.setBlockData(directional);
-                    block.getState().update(true);
-                }
+            switch (currentFacing) {
+                case NORTH:
+                    newFacing = org.bukkit.block.BlockFace.SOUTH;
+                    break;
+                case SOUTH:
+                    newFacing = org.bukkit.block.BlockFace.NORTH;
+                    break;
+                case EAST:
+                    newFacing = org.bukkit.block.BlockFace.WEST;
+                    break;
+                case WEST:
+                    newFacing = org.bukkit.block.BlockFace.EAST;
+                    break;
+                case DOWN:
+                    newFacing = org.bukkit.block.BlockFace.UP;
+                    break;
+                case UP:
+                    newFacing = org.bukkit.block.BlockFace.DOWN;
+                    break;
+                default:
+                    break;
+            }
+
+            if (newFacing != null && currentFacing != newFacing) {
+                directional.setFacing(newFacing);
+                block.setBlockData(directional, true);
             }
         }
     }
