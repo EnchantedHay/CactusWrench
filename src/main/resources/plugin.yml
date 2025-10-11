@@ -1,8 +1,7 @@
 name: CactusWrench
-version: 1.0.1
-main: top.chancelethay.cactuswrench.CactusWrenchPlugin
+version: 1.1.0
+main: top.chancelethay.cactuswrench.CactusWrench
 api-version: 1.21.8
 commands:
   cactuswrench:
-
-    description: 使用仙人掌来反转方块的朝向
+    description: Use a cactus in the main hand to rotate blocks, and in the off hand to flip blocks placed.
