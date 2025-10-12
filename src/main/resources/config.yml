@@ -1,0 +1,9 @@
+language: en_us
+
+cooldown-milliseconds: 300
+
+# Call Block.tick() after using cactus in the main-hand to rotate
+do-rotated-block-tick: true
+
+# Call Block.tick() after using cactus in the off-hand to flip
+do-flipped-block-tick: true
