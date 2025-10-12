@@ -1,7 +1,8 @@
 name: CactusWrench
-version: 1.1.0
+version: 1.2.0
 main: top.chancelethay.cactuswrench.CactusWrench
 api-version: 1.21.8
 commands:
   cactuswrench:
     description: Use a cactus in the main hand to rotate blocks, and in the off hand to flip blocks placed.
+
